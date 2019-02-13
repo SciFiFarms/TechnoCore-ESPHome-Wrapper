@@ -7,12 +7,14 @@ else
 fi
 echo "Volume: $volume"
 
-docker run --rm --name ${stack_name}_${service_name} \
+docker run --rm --name ${stack_name}_${service_name}_app \
     -t --network ${stack_name}_web \
     -e CA="$(cat /run/secrets/ca)" \
+    -e MQTT_BROKER="$(cat /run/secrets/domain)" \
     -e MQTT_USERNAME="$(cat /run/secrets/mqtt_username)" \
     -e MQTT_PASSWORD="$(cat /run/secrets/mqtt_password)" \
     -e VAULT_TOKEN="$(cat /run/secrets/token)" \
+    -p 6051:5678 \
     -v $volume \
     --privileged \
     ${image_provider}/technocore-${service_name}:${TAG}
