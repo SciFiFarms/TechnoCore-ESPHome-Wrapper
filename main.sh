@@ -16,5 +16,6 @@ docker run --rm --name ${stack_name}_${service_name}_app \
     -e VAULT_TOKEN="$(cat /run/secrets/token)" \
     -p 6051:5678 \
     -v $volume \
+    -v ${host_working_dir}/$esphome_core \
     --privileged \
     ${image_provider}/technocore-${service_name}:${TAG}
