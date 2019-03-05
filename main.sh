@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if [ -d /config/ ]
 then
-    volume=${host_working_dir}/esphomeyaml/config/:/config
+    volume=${host_working_dir}/hals/:/config
 else
     volume=${stack_name}_${service_name}:/config 
 fi
