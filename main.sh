@@ -8,8 +8,10 @@ fi
 echo "Volume: $volume"
 
 docker run --rm --name ${stack_name}_${service_name}_app \
-    -t --network ${stack_name}_web \
+    -t \
+    --network ${stack_name}_web \
     -e CA="$(cat /run/secrets/ca)" \
+    -e ESPHOME_DASHBOARD_USE_PING="true" \
     -e MQTT_BROKER="$(cat /run/secrets/domain)" \
     -e MQTT_USERNAME="$(cat /run/secrets/mqtt_username)" \
     -e MQTT_PASSWORD="$(cat /run/secrets/mqtt_password)" \
@@ -17,5 +19,6 @@ docker run --rm --name ${stack_name}_${service_name}_app \
     -p 6051:5678 \
     -v $volume \
     -v ${host_working_dir}/$esphome_core \
+    -v ${host_working_dir}/$esphome_app \
     --privileged \
     ${image_provider}/technocore-${service_name}:${TAG}
