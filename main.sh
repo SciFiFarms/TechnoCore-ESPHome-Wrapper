@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
-if [ -d /config/ ]
-then
-    volume=${host_working_dir}/hals/:/config
-else
-    volume=${stack_name}_${service_name}:/config 
-fi
-echo "Volume: $volume"
-
+volume=${host_working_dir}/hals/:/config
+echo "Config mount: $volume"
 docker run --rm --name ${stack_name}_${service_name}_app \
     -t \
     --network ${stack_name}_web \
