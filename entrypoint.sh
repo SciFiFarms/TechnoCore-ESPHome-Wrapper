@@ -18,7 +18,7 @@ function restart_for_usb() {
 
 restart_for_usb &
 
-docker rm -f ${stack_name}_${service_name}_app &> /dev/null
+docker rm -f ${STACK_NAME}_${service_name}_app &> /dev/null
 # Need to reboot nginx so that any cached/stale IP addresses for the service are flushed. 
-docker service update --force --detach ${stack_name}_nginx 
+#docker service update --force --detach ${STACK_NAME}_nginx 
 exit 0
