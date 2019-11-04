@@ -1,7 +1,8 @@
 FROM docker:18.09 AS base
 
 FROM alpine:latest
-RUN apk add --no-cache bash 
+# socat is used to forward traffic from the wrapper to the running service.
+RUN apk add --no-cache bash socat
 COPY --from=base / /
 
 # Set up the CMD as well as the pre and post hooks.

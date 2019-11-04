@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 volume=${TECHNOCORE_ROOT}/hals/:/config
 
+# Using socat to forward all traffic directed to the wrapper container on to the actual application.
+# https://stackoverflow.com/questions/46099874/how-can-i-forward-a-port-from-one-docker-container-to-another
+socat TCP-LISTEN:${SERVICE_PORT},fork TCP:${STACK_NAME}_${service_name}_app:${SERVICE_PORT} &
+
 # This allows us to pass the envs set in the compose.yml file into the wrapped service.
 # https://askubuntu.com/questions/275965/how-to-list-all-variables-names-and-their-current-values
 env_vars=
