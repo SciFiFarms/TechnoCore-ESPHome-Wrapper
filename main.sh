@@ -68,6 +68,11 @@ for env in $(declare -xpn | cut -d " " -f 3- | cut -d "=" -f 1 | \
 env_vars="${env_vars} -e ${env}=${!env}"
 done
 
+# Swarm namespaces volumes with the $STACK_NAME
+if ! echo "$VOLUME" | grep "/"; then
+    VOLUME=${STACK_NAME}_$VOLUME
+fi
+
 docker run --rm --name ${STACK_NAME}_${service_name}_app \
     -t \
     --network ${STACK_NAME}_${service_name} \
