@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-volume=${TECHNOCORE_ROOT}/hals/:/config
 
 # Using socat to forward all traffic directed to the wrapper container on to the actual application.
 # https://stackoverflow.com/questions/46099874/how-can-i-forward-a-port-from-one-docker-container-to-another
@@ -73,7 +72,7 @@ docker run --rm --name ${STACK_NAME}_${service_name}_app \
     -t \
     --network ${STACK_NAME}_${service_name} \
     $env_vars \
-    -v $volume \
+    -v $VOLUME:/config \
     -v ${host_working_dir}/$esphome_core \
     -v ${host_working_dir}/$esphome_app \
     -l traefik.frontend.rule=$ESPHOME_ROUTING_LABEL \
