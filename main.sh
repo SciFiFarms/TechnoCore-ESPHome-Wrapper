@@ -54,7 +54,7 @@ env_secrets_expand
 # https://askubuntu.com/questions/275965/how-to-list-all-variables-names-and-their-current-values
 env_vars=
 for env in $(declare -xpn | cut -d " " -f 3- | cut -d "=" -f 1 | \
-        grep -v HOME | \
+        grep -vw HOME | \
         grep -v HOSTNAME | \
         grep -v OLDPWD | \
         grep -v PATH | \
