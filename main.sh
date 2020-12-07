@@ -73,10 +73,16 @@ if ! echo "$VOLUME" | grep "/"; then
     VOLUME=${STACK_NAME}_$VOLUME
 fi
 
+if $DEBUG 
+then
+    debugging="-p $DEBUG_PORT:$DEBUG_PORT "
+fi
+
 docker run --rm --name ${STACK_NAME}_${service_name}_app \
     -t \
     --network ${STACK_NAME}_${service_name} \
     $env_vars \
+    $debugging \
     -v $VOLUME:/config \
     -v ${host_working_dir}/$esphome_core \
     -v ${host_working_dir}/$esphome_app \
