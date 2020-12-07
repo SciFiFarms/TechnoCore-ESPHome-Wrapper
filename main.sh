@@ -85,7 +85,7 @@ docker run --rm --name ${STACK_NAME}_${service_name}_app \
     $debugging \
     -v $VOLUME:/config \
     -v ${host_working_dir}/$esphome_core \
-    -v ${host_working_dir}/$esphome_app \
+    -v $ESPHOME_VOLUME \
     -l traefik.frontend.rule=$ESPHOME_ROUTING_LABEL \
     -l traefik.frontend.priority=$ESPHOME_ROUTING_LABEL_PRIORITY \
     -l traefik.port=${SERVICE_PORT} \
